@@ -1,4 +1,4 @@
-# Laboratorio: Monitorización de la Nocicepción y Detección de Picos Fotopletismográficos (PPG)
+# Laboratorio 3: Cálculo ambulatorio del índice pletismográfico quirúrgico (SPI)
 
 **Integrantes:**
 * Juan Sebastián López Duarte
