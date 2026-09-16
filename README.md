@@ -209,13 +209,7 @@ El sistema desarrollado logra capturar de forma consistente la respuesta autonó
 
 ## 10. Conclusiones
 
-Esta práctica permitió construir e implementar de forma exitosa un sistema ambulatorio capaz de estimar el índice pletismográfico quirúrgico (SPI) a partir de una señal fotopletismográfica capturada con un sensor MAX30102 y procesada en tiempo real en MATLAB, replicando la lógica de cálculo empleada por monitores clínicos comerciales de nocicepción.
-
-Los resultados muestran que el SPI calculado responde de forma coherente a un estímulo nociceptivo experimental (Cold Pressor Test), aumentando durante la maniobra y disminuyendo en la fase de recuperación, lo cual confirma que las variables extraídas de la onda de pulso (PPGA y HBI) capturan efectivamente cambios en el balance simpático-vagal asociados a la activación nociceptiva.
-
-Sin embargo, es fundamental distinguir entre *nocicepción* (respuesta fisiológica y autonómica, medible objetivamente por el SPI) y *dolor* (experiencia subjetiva y consciente, que involucra componentes cognitivos y emocionales no capturables por una señal fisiológica periférica). El SPI —y por extensión, el sistema aquí desarrollado— es una herramienta de apoyo para inferir el balance nocicepción-analgesia, particularmente útil bajo anestesia general (donde el paciente no puede reportar dolor verbalmente), pero no reemplaza la evaluación clínica del dolor en un paciente consciente.
-
-Como siguiente paso, sería valioso extender esta práctica incorporando un método de detección de artefactos de movimiento de bajo costo computacional (como se sugiere en la literatura consultada [9]), así como comparar el desempeño del sistema frente a un monitor comercial de SPI bajo condiciones controladas, para cuantificar formalmente su exactitud.
+La práctica permitió desarrollar un sistema ambulatorio para el **cálculo continuo del índice pletismográfico quirúrgico (SPI)** a partir de las variaciones de la señal PPG, utilizando las características de amplitud del pulso (PPGA) e intervalo entre latidos (HBI). Los resultados obtenidos mostraron un **SPI basal entre aproximadamente 30 y 70**, seguido de un incremento durante el *Cold Pressor Test* (CPT), alcanzando un valor cercano a **88**, y posteriormente un descenso gradual durante la recuperación. Esto evidencia que el sistema fue capaz de detectar cambios en la respuesta autonómica asociados al estímulo aplicado, cumpliendo los objetivos de adquisición, procesamiento y cálculo del SPI planteados en la práctica. Sin embargo, se identificó que el SPI **representa una respuesta fisiológica relacionada con la nocicepción y no una medición directa del dolor percibido**, además de presentar sensibilidad a factores como movimiento y contacto con el sensor. Como siguiente paso, se propone realizar pruebas con más sujetos y bajo condiciones controladas para evaluar la consistencia de los resultados y mejorar la confiabilidad del sistema. 
 
 ---
 
