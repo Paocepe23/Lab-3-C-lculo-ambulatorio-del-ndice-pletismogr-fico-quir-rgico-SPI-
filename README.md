@@ -71,21 +71,43 @@ El script realiza, en orden:
 10.*Cálculo del SPI* y graficación de su evolución en el tiempo, señalando el inicio y fin del CPT.
 
 ## 5. Definición matemática del SPI
-Para cada latido detectado se calculan dos variables a partir de la onda de pulso:
-- *Amplitud pletismográfica de pulso (PPGA):* diferencia entre el valor del pico sistólico y el valle diastólico que lo precede.
-  PPGA(i) = pico(i) − valle_anterior(i)
-- *Intervalo entre latidos (HBI, *Heartbeat Interval):** tiempo transcurrido entre dos picos sistólicos consecutivos.
-  HBI(i) = t_pico(i) − t_pico(i−1)
-Ambas variables se normalizan contra un periodo de referencia (línea base, primeros 40 s de reposo) usando los percentiles 10 y 90 como límites, para obtener PPGAnorm y HBInorm en una escala de 0 a 100:
+Para cada latido detectado i, el algoritmo extrae dos variables continuas a partir de la morfo-fisiología de la onda pletismográfica (PPG):
 
-PPGAnorm(i) = 100 × (PPGA(i) − P10_baseline) / (P90_baseline − P10_baseline)
-HBInorm(i)  = 100 × (HBI(i)  − P10_baseline) / (P90_baseline − P10_baseline)
-(ambos resultados se acotan al intervalo [0, 100]).
+Amplitud pletismográfica de pulso (PPGA): Diferencia de tensión/amplitud entre el pico sistólico actual y el valle diastólico que lo precede:
+PPGA(i) = x(t_pico, i) - x(t_valle, i)
 
-Finalmente, el *SPI* se calcula mediante la fórmula propuesta por Huiku et al. (2007) [4]:
-SPI = 100 − (0.33 × HBInorm + 0.67 × PPGAnorm)
+Intervalo entre latidos (HBI, Heartbeat Interval): Tiempo transcurrido entre dos picos sistólicos consecutivos:
+HBI(i) = t_pico(i) - t_pico(i-1)
 
-Un aumento del tono simpático (estímulo nociceptivo) produce *taquicardia* (↓HBI) y *vasoconstricción periférica* (↓PPGA), lo cual, según la fórmula, se traduce en un *aumento del SPI* — coherente con lo reportado por Oh et al. (2024) [6] en su diagrama de determinantes del SPI.
+1. Normalización Adaptativa contra la Línea Base
+Ambas variables se normalizan en relación con el periodo de reposo del sujeto (línea base, primeros 40 s) para ajustar la escala a la variabilidad interindividual de tono vascular. Se utilizan los percentiles 10 (P10) y 90 (P90) de la línea base como límites robustos ante artefactos:
+
+PPGAnorm(i) = 100 * (PPGA(i) - P10_base) / (P90_base - P10_base)
+
+HBInorm(i) = 100 * (HBI(i) - P10_base) / (P90_base - P10_base)
+
+Nota de implementación (clipping): Ambas variables normalizadas se acotan estrictamente al rango [0, 100] mediante la función:
+X_norm_clipped = min(max(X_norm, 0), 100)
+
+2. Suavizado Exponencial Latido a Latido (EMA)
+Para atenuar variaciones bruscas de alta frecuencia causadas por la arritmia de la respiración y ruido no estacionario, se aplica un filtro de media móvil exponencial (EMA) con factor de olvido alpha = 0.2:
+
+PPGAsuave(i) = alpha * PPGAnorm(i) + (1 - alpha) * PPGAsuave(i-1)
+
+HBIsuave(i) = alpha * HBInorm(i) + (1 - alpha) * HBIsuave(i-1)
+
+3. Ecuación Final del SPI e Interpretación Fisiológica
+El Índice Pletismográfico Quirúrgico (SPI) combina ponderadamente ambas componentes según el modelo propuesto por Huiku et al. (2007) [4]:
+
+SPI(i) = 100 - (0.33 * HBIsuave(i) + 0.67 * PPGAsuave(i))
+
+Comportamiento Fisiológico del Modelo:
+Reposo / Confort: Predominio Parasimpático - HBI alto (bradicardia) y PPGA alto (vasodilatación) -> HBInorm ≈ 100 y PPGAnorm ≈ 100 -> SPI < 50 (Bajo)
+
+Estresor / CPT (Hielo): Activación Simpática - HBI bajo (taquicardia) y PPGA bajo (vasoconstricción) -> HBInorm -> 0 y PPGAnorm -> 0 -> SPI >= 50 (Elevado)
+
+Un incremento del tono simpático debido a un estímulo nociceptivo provoca vasoconstricción periférica (caída de PPGA) y taquicardia (caída de HBI). Como ambas variables disminuyen dentro del paréntesis de la fórmula, el término sustraendo se reduce y provoca una elevación neta del SPI, lo cual concuerda con lo reportado por Oh et al. (2024) [6].
+
 
 ## 6. Procedimiento realizado
 
