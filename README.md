@@ -185,8 +185,9 @@ En ambas corridas el SPI sube después del marcador de "Inicio CPT" y llega a va
 
 ## Otra toma de datos
 
-<img width="1600" height="742" alt="IMG-20260915-WA0010" src="https://github.com/user-attachments/assets/26a327c1-ad90-43ab-ac81-0a1add9b2971" />
-<img width="1600" height="742" alt="IMG-20260915-WA0010" src="https://github.com/user-attachments/assets/55f58f2c-2619-4b20-a8c1-9dd3cdb54522" />
+<img width="450" height="300" alt="IMG-20260915-WA0010" src="https://github.com/user-attachments/assets/26a327c1-ad90-43ab-ac81-0a1add9b2971" />
+<img width="450" height="300" alt="IMG-20260915-WA0009" src="https://github.com/user-attachments/assets/81748f0c-54d9-4a58-a628-b382f8cdf7a3" />
+
 
 
 La señal filtrada presenta pulsaciones periódicas relativamente visibles durante la mayor parte del registro, aunque se observan varios picos de gran amplitud que corresponden a posibles artefactos de movimiento o cambios bruscos en el contacto del sensor. Los más evidentes aparecen aproximadamente en 20 s (~3,2×10⁴), 41 s (~−0,8×10⁴)**, 81 s (~−0,6×10⁴) y 113 s (~1,6×10⁴). A pesar de estos artefactos, entre ellos se conserva una oscilación repetitiva compatible con la componente pulsátil de la señal PPG.
