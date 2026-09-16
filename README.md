@@ -183,6 +183,16 @@ En ambas corridas el SPI sube después del marcador de "Inicio CPT" y llega a va
 - Un incremento sostenido del SPI durante la maniobra de CPT, alcanzando un pico cercano a 88 justo después de finalizado el estímulo.
 - Un retorno gradual del SPI hacia valores cercanos a los de reposo durante el periodo de recuperación.
 
+## Otra toma de datos
+
+<img width="1600" height="742" alt="IMG-20260915-WA0010" src="https://github.com/user-attachments/assets/26a327c1-ad90-43ab-ac81-0a1add9b2971" />
+<img width="1600" height="742" alt="IMG-20260915-WA0010" src="https://github.com/user-attachments/assets/55f58f2c-2619-4b20-a8c1-9dd3cdb54522" />
+
+
+La señal filtrada presenta pulsaciones periódicas relativamente visibles durante la mayor parte del registro, aunque se observan varios picos de gran amplitud que corresponden a posibles artefactos de movimiento o cambios bruscos en el contacto del sensor. Los más evidentes aparecen aproximadamente en 20 s (~3,2×10⁴), 41 s (~−0,8×10⁴)**, 81 s (~−0,6×10⁴) y 113 s (~1,6×10⁴). A pesar de estos artefactos, entre ellos se conserva una oscilación repetitiva compatible con la componente pulsátil de la señal PPG.
+
+En la señal SPI, antes del inicio de la CPT, el SPI presenta valores variables, aproximadamente entre 30 y 55, con algunos valores iniciales más altos. Después del marcador d *“Inicio CPT” (~40 s) se observa un incremento progresivo y sostenido del SPI, alcanzando valores cercanos a 95–100 durante el estímulo. Tras el marcador de **“Fin CPT” (~80 s)**, el índice comienza a disminuir y posteriormente fluctúa, llegando nuevamente a valores alrededor de 40–60 durante la recuperación.
+
 ---
 
 ## 8. Problemas encontrados y solución (bitácora de depuración)
